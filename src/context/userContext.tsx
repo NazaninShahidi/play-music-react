@@ -38,7 +38,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   }, [userInfo]);
 
   function loginHandler(user: UserInfo) {
-    if (user.userName === "test" && user.password === "123456") {
+    if (user.userName === "user" && user.password === "123456") {
       setUserInfo({ userName: user.userName, password: user.password });
       navigate("/");
     } else {

@@ -8,38 +8,48 @@ function Login() {
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(userName, password);
     if (login) {
       login({ userName, password });
     }
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmitHandler}>
-        <div>
-          <label htmlFor="userName">User Name</label>
-          <input
-            type="text"
-            name="userName"
-            id="userName"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <form onSubmit={onSubmitHandler}>
+      <div className="mb-4">
+        <label htmlFor="userName" className="block text-gray-400 mb-2">
+          User Name
+        </label>
+        <input
+          type="text"
+          id="userName"
+          name="userName"
+          className="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="password" className="block text-gray-400 mb-2">
+          password
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          className="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="w-full p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-600"
+        disabled={password === "" || userName === ""}
+      >
+        login
+      </button>
+    </form>
   );
 }
 

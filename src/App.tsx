@@ -3,6 +3,7 @@ import ProtectedRoute from "./module/login/ProtectedRoute";
 import LoginPage from "./page/LoginPage";
 import HomePage from "./page/HomePage";
 import { UserContextProvider } from "./context/userContext";
+import Layout from "./layout";
 
 function App() {
   return (
@@ -12,9 +13,11 @@ function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute element={<HomePage />} redirectTo="/login" />
+              <ProtectedRoute element={<Layout />} redirectTo="/login" />
             }
-          />
+          >
+            <Route index element={<HomePage />} />
+          </Route>
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </UserContextProvider>
