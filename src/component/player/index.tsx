@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Imusic } from "../../dummyData";
+import VolumeComponent from "../volume";
 
 type props = {
   musicTracks: Imusic[];
   currentTrack: Imusic;
-  playTrack: Function;
+  playTrack: (track: Imusic) => void;
   isPlaying: boolean;
   setIsPlaying: (item: boolean) => void;
 };
@@ -17,7 +18,6 @@ function Player({
   setIsPlaying,
 }: props) {
   const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(1);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const nextTrack = () => {
     const currentIndex = musicTracks.findIndex(
@@ -34,14 +34,6 @@ function Player({
     const prevIndex =
       (currentIndex - 1 + musicTracks.length) % musicTracks.length;
     playTrack(musicTracks[prevIndex]);
-  };
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-    }
   };
 
   const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -180,18 +172,7 @@ function Player({
           className="w-[500px]"
         />
       </div>
-      <div className="flex items-center">
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={volume}
-          onChange={handleVolumeChange}
-          className="mr-4"
-        />
-        <audio ref={audioRef} />
-      </div>
+      <VolumeComponent audioRef={audioRef} />
     </div>
   );
 }
