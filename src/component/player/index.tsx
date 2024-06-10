@@ -98,7 +98,7 @@ function Player({
   }, []);
 
   return (
-    <div className="fixed flex justify-around bottom-0 left-0 right-0 bg-gray-800 p-4 items-center">
+    <div className="md:fixed flex md:flex-row space-y-4 md:space-y-0 flex-col justify-around bottom-0 left-0 right-0 bg-gray-800 p-4 items-center">
       <div className="flex items-center">
         <img
           src={currentTrack.img}
@@ -169,7 +169,7 @@ function Player({
           max="100"
           value={progress}
           onChange={handleProgressChange}
-          className="w-[500px]"
+          className="md:w-[500px] w-[400px]"
         />
       </div>
       <VolumeComponent audioRef={audioRef} />
